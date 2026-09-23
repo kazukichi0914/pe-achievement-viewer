@@ -1,0 +1,235 @@
+:root {
+  --blue: #1a73e8;
+  --blue-dark: #1967d2;
+  --blue-deep: #174ea6;
+  --blue-light: #e8f0fe;
+  --blue-line: #d2e3fc;
+  --text: #202124;
+  --sub: #5f6368;
+  --line: #dadce0;
+  --bronze: #b0764a;
+  --silver: #9aa0a6;
+  --gold: #f9ab00;
+  --platinum: #7b93b5;
+  --diamond: #4fc3f7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  position: relative;
+  width: 380px;
+  margin: 0;
+  font: 13px/1.45 "Google Sans", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  color: var(--text);
+  background: #f8f9fa;
+}
+
+/* ページ上部の青い帯と斜めの図形 */
+.hero {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 150px;
+  background:
+    linear-gradient(160deg, transparent 62%, rgba(255, 255, 255, .08) 62%),
+    linear-gradient(20deg, var(--blue-dark) 0 38%, transparent 38%),
+    var(--blue);
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+}
+
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 10px 16px;
+  color: #fff;
+}
+.brand { display: flex; align-items: center; gap: 8px; font-size: 16px; letter-spacing: .1px; }
+.logo { width: 24px; height: 24px; }
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
+header .icon-btn { color: #fff; }
+header .icon-btn:hover { background: rgba(255, 255, 255, .15); }
+.icon-btn:disabled { opacity: .4; cursor: default; }
+#refresh.spin svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+main { position: relative; padding: 0 12px; }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, .12);
+}
+.card-title { font-size: 16px; color: var(--text); }
+.divider { height: 1px; background: var(--line); margin: 10px 0 8px; }
+
+#status { color: var(--sub); padding: 6px 0; }
+#status:empty { display: none; }
+#status.error { color: #d93025; }
+
+/* 製品の切り替え */
+.selector { display: flex; align-items: center; gap: 2px; margin-bottom: 10px; }
+.select-wrap { flex: 1; position: relative; }
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  border: 5px solid transparent;
+  border-top-color: var(--sub);
+  transform: translateY(-2px);
+  pointer-events: none;
+}
+select {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 6px 28px 6px 6px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+}
+select:hover, select:focus { background: var(--blue-light); outline: none; }
+.nav { color: var(--sub); }
+.nav:not(:disabled):hover { background: var(--blue-light); color: var(--blue); }
+
+/* 3つのタイル */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 104px;
+  padding: 8px 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+}
+.medal-tile { background: var(--blue-light); border-color: var(--blue-line); }
+#medal svg { width: 44px; height: 50px; display: block; }
+.level { margin-top: 4px; font-weight: 700; color: var(--blue-deep); font-size: 13px; }
+.num { font-size: 24px; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
+.desc { font-size: 10.5px; color: var(--sub); line-height: 1.35; margin-top: 2px; }
+
+/* 全体の達成状況 */
+.section-label { margin: 16px 0 8px; font-size: 12.5px; color: var(--sub); }
+.track {
+  position: relative;
+  height: 4px;
+  margin: 0 8px;
+  border-radius: 2px;
+  background: #e8eaed;
+}
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--bronze), var(--silver) 25%, var(--gold) 50%, var(--platinum) 75%, var(--diamond));
+  background-size: var(--full, 100%) 100%;
+}
+.marker {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+.marker svg { width: 100%; height: 100%; display: block; }
+.track-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 10.5px;
+  color: #9aa0a6;
+}
+.track-labels span { width: 20%; text-align: center; }
+.track-labels span:first-child { text-align: left; }
+.track-labels span:last-child { text-align: right; }
+.track-labels .done { color: var(--sub); }
+.track-labels .current { color: var(--blue-deep); font-weight: 700; }
+.to-next { margin-top: 8px; font-size: 12px; color: var(--sub); }
+.to-next b { color: var(--blue); font-weight: 500; }
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--blue-light);
+  color: var(--blue-deep);
+  font-size: 12.5px;
+}
+.banner[hidden] { display: none; }
+.banner svg { width: 18px; height: 18px; flex: none; fill: #f9ab00; }
+
+.breakdown div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+.breakdown div:last-child { border-bottom: 0; }
+.breakdown b { font-weight: 500; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
+.breakdown .none { color: var(--sub); justify-content: flex-start; }
+
+/* すべての製品 */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 -8px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.row:hover { background: #f1f3f4; }
+.row.selected { background: var(--blue-light); }
+.row .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: #dadce0; }
+.row .name { flex: 1; }
+.row .lv { font-size: 11px; color: var(--sub); }
+.row .pts { min-width: 54px; text-align: right; color: var(--blue-deep); font-variant-numeric: tabular-nums; }
+.more {
+  margin-top: 4px;
+  padding: 6px 0 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 12px;
+  font-size: 11px;
+  color: var(--sub);
+}
+footer a { color: var(--blue); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
